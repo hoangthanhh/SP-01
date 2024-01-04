@@ -102,7 +102,7 @@ public class HoaDonController {
     }
 
     @RequestMapping(value = "layhoadonvachitiet", method = RequestMethod.GET)
-    public Optional<HoaDon> layHoaDonVaChiTiet(@RequestParam int hoaDonId,Integer pageVar,Integer size) {
+    public Optional<Page<HoaDon>> layHoaDonVaChiTiet(@RequestParam int hoaDonId,Integer pageVar,Integer size) {
         if (pageVar == null) {
             pageVar = 1;
         }
@@ -110,6 +110,6 @@ public class HoaDonController {
             size = 1;
         }
         Pageable page = PageRequest.of(pageVar,size);
-        return hoaDonService.layHoaDonVaChiTiet(hoaDonId,page);
+        return hoaDonService.layHoaDonVaChiTiet(hoaDonId, page);
     }
 }

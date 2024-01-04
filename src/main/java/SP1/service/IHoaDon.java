@@ -15,5 +15,5 @@ public interface IHoaDon {
     public Page<HoaDonCustom> layHoaDonTrongKhoang(int month, int ngayMot, int ngayHai, Pageable page);
     public Page<HoaDonCustom> layHoaDonTheoTongTien(double Money, double money, Pageable page);
     public Page<HoaDonCustom> layHoaDonTheoMaGDHoacTenHD(String maGD, String tenHD, Pageable page);
-    public Optional<HoaDon> layHoaDonVaChiTiet(int hoaDonId, Pageable page);
+    public Optional<Page<HoaDon>> layHoaDonVaChiTiet(int hoaDonId,Pageable page);
 }

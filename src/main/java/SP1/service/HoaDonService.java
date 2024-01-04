@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Service
-public class HoaDonService implements IHoaDon{
+public class HoaDonService implements IHoaDon {
     @Autowired
     private HoaDonRepo hoaDonRepo;
     @Autowired
@@ -26,7 +26,7 @@ public class HoaDonService implements IHoaDon{
     @Autowired
     private SanPhamRepo sanPhamRepo;
 
-    private String taoMaGiaoDichDuyNhat(){
+    private String taoMaGiaoDichDuyNhat() {
         LocalDateTime now = LocalDateTime.now();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -37,10 +37,12 @@ public class HoaDonService implements IHoaDon{
         String maGD = ngayDinhDang + "_" + chiSo;
         return maGD;
     }
+
     private int laySoLuongDonTrongNgay(String formattedDate) {
         int soLuongDon = hoaDonRepo.demSoHoaDonTrongNgay(formattedDate);
         return soLuongDon;
     }
+
     @Override
     public String themHoaDon(HoaDon hoaDon) {
         String maGiaoDich = taoMaGiaoDichDuyNhat();
@@ -49,12 +51,11 @@ public class HoaDonService implements IHoaDon{
         hoaDon.setTongTien(0.0);
 
         double tongTien = hoaDon.getTongTien();
-        for (ChiTietHoaDon chiTietHoaDon: hoaDon.getChiTietHoaDons()) {
+        for (ChiTietHoaDon chiTietHoaDon : hoaDon.getChiTietHoaDons()) {
             Optional<SanPham> sanPham = sanPhamRepo.findById(chiTietHoaDon.getSanPham().getSanPhamId());
             if (sanPham.isEmpty()) {
                 return "Sản phẩm chưa tồn tại. Vui lòng kiểm tra lại!";
-            }
-            else {
+            } else {
                 hoaDonRepo.save(hoaDon);
                 SanPham sp = sanPham.get();
                 chiTietHoaDon.setThanhTien(chiTietHoaDon.getSoLuong() * sp.getGiaThanh());
@@ -81,7 +82,7 @@ public class HoaDonService implements IHoaDon{
         }
 
         double tongTien = 0.0;
-        for (ChiTietHoaDon chiTietHoaDon: hoaDon.getChiTietHoaDons()) {
+        for (ChiTietHoaDon chiTietHoaDon : hoaDon.getChiTietHoaDons()) {
             SanPham sanPham = sanPhamRepo.findById(chiTietHoaDon.getSanPham().getSanPhamId()).get();
 //            sanPham.setGiaThanh(chiTietHoaDon.getSanPham().getGiaThanh());
 //            chiTietHoaDon.setSanPham(sanPham);
@@ -116,17 +117,17 @@ public class HoaDonService implements IHoaDon{
 
     @Override
     public Page<HoaDonCustom> layHoaDonTheoNamThang(int year, int month, Pageable page) {
-        return hoaDonRepo.layHoaDonTheoNamThang(year,month,page);
+        return hoaDonRepo.layHoaDonTheoNamThang(year, month, page);
     }
 
     @Override
     public Page<HoaDonCustom> layHoaDonTrongKhoang(int month, int ngayMot, int ngayHai, Pageable page) {
-        return hoaDonRepo.layHoaDonTrongKhoang(month,ngayMot,ngayHai,page);
+        return hoaDonRepo.layHoaDonTrongKhoang(month, ngayMot, ngayHai, page);
     }
 
     @Override
     public Page<HoaDonCustom> layHoaDonTheoTongTien(double Money, double money, Pageable page) {
-        return hoaDonRepo.layHoaDonTheoTongTien(Money,money,page);
+        return hoaDonRepo.layHoaDonTheoTongTien(Money, money, page);
     }
 
     @Override
@@ -135,9 +136,10 @@ public class HoaDonService implements IHoaDon{
     }
 
     @Override
-    public Optional<HoaDon> layHoaDonVaChiTiet(int hoaDonId,Pageable page) {
-        Optional<HoaDon> hoaDonOptional = hoaDonRepo.findById(hoaDonId,page);
-        return hoaDonOptional;
+    public Optional<Page<HoaDon>> layHoaDonVaChiTiet(int hoaDonId, Pageable page) {
+        Page<HoaDon> hoaDonPage = hoaDonRepo.findByIdAndPaging(hoaDonId, page);
+        return Optional.ofNullable(hoaDonPage);
+
 
 //        HoaDon res  =  hoaDonRepo.findById(hoaDonId).get();
 //        return (HoaDonCustom) res;

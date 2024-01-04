@@ -32,6 +32,8 @@ public interface HoaDonRepo extends JpaRepository<HoaDon,Integer> {
 //    @Query(value = "SELECT * FROM hoadon JOIN chitiethoadon ON hoadon.hoa_don_id = chitiethoadon.hoadonid WHERE hoadon.hoa_don_id = :hoaDonId ORDER BY hoadon.thoigiantao DESC", nativeQuery = true)
 //    List<HoaDonCustom> layHoaDonVaChiTiet(@Param("hoaDonId") int hoaDonId);
 
-    @Query(value = "select * from chitiethoadon where hoadonid = :hoaDonId", nativeQuery = true)
-    HoaDon layHoaDonVaChiTiet(@Param("hoaDonId") int hoaDonId,Pageable page);
+//    @Query(value = "select * from chitiethoadon where hoadonid = :hoaDonId", nativeQuery = true)
+//    HoaDon layHoaDonVaChiTiet(@Param("hoaDonId") int hoaDonId,Pageable page);
+    Page<HoaDon> findByIdAndPaging(int hoaDonId, Pageable page);
+
 }
