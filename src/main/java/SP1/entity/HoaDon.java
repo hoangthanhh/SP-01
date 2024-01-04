@@ -1,8 +1,5 @@
 package SP1.entity;
-
-import SP1.dto.HoaDonCustom;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -38,15 +35,12 @@ public class HoaDon {
     @Column(name = "tongtien")
     private Double tongTien;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference
     @JoinColumn(name = "khachhangid")
     private KhachHang khachHang;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hoaDon")
-//    @JsonIgnoreProperties(value = "hoaDon")
-
-    @OneToMany(mappedBy = "hoaDon", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hoaDon", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<ChiTietHoaDon> chiTietHoaDons;
 

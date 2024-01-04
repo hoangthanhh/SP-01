@@ -23,17 +23,12 @@ public class ChiTietHoaDon {
     @Column(name = "thanhTien")
     private Double thanhTien;
 
-//    @ManyToOne
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference
     @JoinColumn(name = "hoadonid")
     private HoaDon hoaDon;
 
-//    @ManyToOne
-//    @JoinColumn(name = "sanphamid")
-//    private SanPham sanPham;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference
     @JoinColumn(name = "sanphamid")
     private SanPham sanPham;

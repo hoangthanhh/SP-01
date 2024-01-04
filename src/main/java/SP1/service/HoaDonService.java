@@ -84,18 +84,14 @@ public class HoaDonService implements IHoaDon {
         double tongTien = 0.0;
         for (ChiTietHoaDon chiTietHoaDon : hoaDon.getChiTietHoaDons()) {
             SanPham sanPham = sanPhamRepo.findById(chiTietHoaDon.getSanPham().getSanPhamId()).get();
-//            sanPham.setGiaThanh(chiTietHoaDon.getSanPham().getGiaThanh());
-//            chiTietHoaDon.setSanPham(sanPham);
             chiTietHoaDon.setThanhTien(chiTietHoaDon.getSoLuong() * sanPham.getGiaThanh());
             tongTien += chiTietHoaDon.getThanhTien();
             hoaDon.setTongTien(tongTien);
             chiTietHoaDon.setHoaDon(hoaDon);
             chiTietHoaDonRepo.save(chiTietHoaDon);
-//            sanPhamRepo.save(sanPham);
         }
         hoaDon.setThoiGianCapNhat(LocalDate.now());
         hoaDonRepo.save(hoaDon);
-//        chiTietHoaDonRepo.save(hoaDon.getChiTietHoaDons());
         return "Hoa don da dc cap nhat thanh cong";
     }
 
@@ -137,11 +133,7 @@ public class HoaDonService implements IHoaDon {
 
     @Override
     public Optional<Page<HoaDon>> layHoaDonVaChiTiet(int hoaDonId, Pageable page) {
-        Page<HoaDon> hoaDonPage = hoaDonRepo.findByIdAndPaging(hoaDonId, page);
+        Page<HoaDon> hoaDonPage = hoaDonRepo.findByHoaDonId(hoaDonId, page);
         return Optional.ofNullable(hoaDonPage);
-
-
-//        HoaDon res  =  hoaDonRepo.findById(hoaDonId).get();
-//        return (HoaDonCustom) res;
     }
 }

@@ -24,7 +24,7 @@ public class LoaiSanPham {
 //    @JsonIgnoreProperties(value = "loaiSanPham")
 //    private Set<SanPham> sanPhams;
 
-    @OneToMany(mappedBy = "loaiSanPham", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "loaiSanPham")
     @JsonManagedReference
     private Set<SanPham> sanPhams;
 }

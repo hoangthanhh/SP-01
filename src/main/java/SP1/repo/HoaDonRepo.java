@@ -10,8 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface HoaDonRepo extends JpaRepository<HoaDon,Integer> {
     @Query("SELECT COUNT(*) FROM HoaDon h WHERE DATE_FORMAT(h.thoiGianTao, '%Y%m%d') = :formattedDate")
@@ -29,11 +27,5 @@ public interface HoaDonRepo extends JpaRepository<HoaDon,Integer> {
     @Query(value = "SELECT * FROM hoadon WHERE (:maGD IS NULL OR magiaodich = :maGD) OR (:tenHD IS NULL OR tenhoadon = :tenHD)", nativeQuery = true)
     Page<HoaDonCustom> layHoaDonTheoMaGDHoacTenHD(@Param("maGD") String maGD, @Param("tenHD") String tenHD, Pageable page);
 
-//    @Query(value = "SELECT * FROM hoadon JOIN chitiethoadon ON hoadon.hoa_don_id = chitiethoadon.hoadonid WHERE hoadon.hoa_don_id = :hoaDonId ORDER BY hoadon.thoigiantao DESC", nativeQuery = true)
-//    List<HoaDonCustom> layHoaDonVaChiTiet(@Param("hoaDonId") int hoaDonId);
-
-//    @Query(value = "select * from chitiethoadon where hoadonid = :hoaDonId", nativeQuery = true)
-//    HoaDon layHoaDonVaChiTiet(@Param("hoaDonId") int hoaDonId,Pageable page);
-    Page<HoaDon> findByIdAndPaging(int hoaDonId, Pageable page);
-
+    Page<HoaDon> findByHoaDonId(int hoaDonId, Pageable page);
 }

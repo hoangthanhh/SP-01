@@ -13,6 +13,5 @@ public interface HoaDonCustom {
     String getGhiChu();
     Double getTongTien();
     Integer getKhachHangId();
-    List<ChiTietHoaDon> getChiTietHoaDons();
 }
 

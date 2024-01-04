@@ -27,11 +27,7 @@ public class KhachHang {
     @Column(name = "sdt")
     private String sdt;
 
-//    @OneToMany(fetch = FetchType.LAZY,mappedBy = "khachHang")
-//    @JsonIgnoreProperties(value = "khachHang")
-//    private Set<HoaDon> hoaDons;
-
-    @OneToMany(mappedBy = "khachHang", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "khachHang")
     @JsonManagedReference
     private Set<HoaDon> hoaDons;
 }

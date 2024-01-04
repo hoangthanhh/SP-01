@@ -1,7 +1,6 @@
 package SP1.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -34,7 +33,7 @@ public class SanPham {
     @Column(name = "kyhieusanpham")
     private String kyHieuSanPham;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference
     @JoinColumn(name = "loaisanphamid")
     private LoaiSanPham loaiSanPham;
@@ -43,7 +42,7 @@ public class SanPham {
 //    @JsonIgnoreProperties(value = "vatTu")
 //    private Set<ChiTietHoaDon> chiTietHoaDons;
 
-    @OneToMany(mappedBy = "sanPham", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sanPham")
     @JsonManagedReference
     private Set<ChiTietHoaDon> chiTietHoaDons;
 }
