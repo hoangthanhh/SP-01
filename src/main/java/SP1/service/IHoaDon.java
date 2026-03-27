@@ -2,6 +2,9 @@ package SP1.service;
 
 import SP1.dto.HoaDonCustom;
 import SP1.entity.HoaDon;
+import SP1.payload.DataRequest.ThemHoaDonRequest;
+import SP1.payload.DataResponse.HoaDonDTO;
+import SP1.payload.Response.ResponseObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,4 +19,5 @@ public interface IHoaDon {
     public Page<HoaDonCustom> layHoaDonTheoTongTien(double Money, double money, Pageable page);
     public Page<HoaDonCustom> layHoaDonTheoMaGDHoacTenHD(String maGD, String tenHD, Pageable page);
     public Optional<Page<HoaDon>> layHoaDonVaChiTiet(int hoaDonId,Pageable page);
+    ResponseObject<HoaDonDTO> themHoaDonRequest(ThemHoaDonRequest request);
 }

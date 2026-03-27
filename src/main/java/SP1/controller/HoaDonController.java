@@ -2,6 +2,9 @@ package SP1.controller;
 
 import SP1.dto.HoaDonCustom;
 import SP1.entity.HoaDon;
+import SP1.payload.DataRequest.ThemHoaDonRequest;
+import SP1.payload.DataResponse.HoaDonDTO;
+import SP1.payload.Response.ResponseObject;
 import SP1.service.HoaDonService;
 import com.google.gson.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,10 @@ public class HoaDonController {
         }).create();
         HoaDon hd = gson.fromJson(hoaDon, HoaDon.class);
         return hoaDonService.themHoaDon(hd);
+    }
+    @PostMapping(value = "themhoadonrequest")
+    public ResponseObject<HoaDonDTO> themHoaDonRequest(@RequestBody ThemHoaDonRequest request){
+        return hoaDonService.themHoaDonRequest(request);
     }
 
     @RequestMapping(value = "suahoadon", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
